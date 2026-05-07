@@ -9,6 +9,7 @@
 - **Ліцензія:** [MIT](./LICENSE)
 - **Репорт ліцензій:** [license-report.txt](./license-report.txt) — згенеровано через `license-checker`
 - **Політика конфіденційності:** [PRIVACY_POLICY.md](./PRIVACY_POLICY.md) (згідно з GDPR)
+- **Документація:** Згенерована за допомогою [JSDoc](https://jsdoc.app/) — див. секцію нижче
 
 --
 
@@ -18,9 +19,32 @@
 
 - `npm install` — встановлення залежностей
 - `npm run dev` — запуск локального сервера
+- `npm run docs` — генерація документації (JSDoc)
+- `npm run storybook` — запуск Storybook
 - `npx storybook@latest init` — ініціалізація Storybook (в процесі)
 
 ```
+
+## Документація (JSDoc)
+
+Документація проєкту згенерована автоматично за допомогою [JSDoc](https://jsdoc.app/).
+
+### Генерація документації:
+```bash
+npm run docs
+```
+
+### Перегляд документації:
+Переконайтеся, що локальний сервер запущений (`npm run dev`), і відкрийте в браузері "Хаб документації":
+```bash
+http://localhost:5173/docs/index.html
+```
+
+Документація включає опис усіх модулів, компонентів, хуків та контекстів:
+- **Компоненти:** Button, Card, Cell, Column, GameBoard, GameOverModal, Layout, Modal
+- **Хуки:** useGameState — логіка гри Connect Four
+- **Контексти:** GameSettingsContext — налаштування гри
+- **Сторінки:** StartPage, GamePage, SettingsForm
 
 ##  Лабораторна №1  
 Створено каркас застосунку без логіки:

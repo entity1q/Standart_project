@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Modal/CookieSettingsModal.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Modal/CookieSettingsModal.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file CookieSettingsModal.jsx
+ * @description Модальне вікно для налаштування згоди на файли cookie (GDPR).
+ * @module components/Modal/CookieSettingsModal
+ */
+
+import { useState } from "react";
+import Modal from "./Modal";
+import Button from "../UI/Button";
+import "./CookieSettingsModal.css";
+
+/**
+ * Компонент модального вікна налаштувань cookie.
+ * @function CookieSettingsModal
+ * @param {Object} props
+ * @param {Function} props.onClose - Закриття вікна без збереження
+ * @param {Function} props.onSave - Збереження налаштувань
+ */
+export default function CookieSettingsModal({ onClose, onSave }) {
+    const [prefs, setPrefs] = useState({
+        necessary: true,
+        analytics: false,
+        marketing: false
+    });
+
+    const handleToggle = (key) => {
+        if (key === "necessary") return;
+        setPrefs(prev => ({ ...prev, [key]: !prev[key] }));
+    };
+
+    return (
+        &lt;Modal>
+            &lt;div className="cookie-settings">
+                &lt;h2>Налаштування файлів cookie&lt;/h2>
+                &lt;p>Виберіть, які файли cookie ви погоджуєтесь використовувати.&lt;/p>
+                
+                &lt;label>
+                    &lt;input type="checkbox" checked={prefs.necessary} readOnly />
+                    &lt;div>
+                        &lt;strong>Необхідні&lt;/strong>
+                        &lt;div style={{fontSize: "12px", color: "#666"}}>Ці файли cookie потрібні для роботи сайту і не можуть бути вимкнені.&lt;/div>
+                    &lt;/div>
+                &lt;/label>
+                
+                &lt;label>
+                    &lt;input type="checkbox" checked={prefs.analytics} onChange={() => handleToggle("analytics")} />
+                    &lt;div>
+                        &lt;strong>Аналітичні&lt;/strong>
+                        &lt;div style={{fontSize: "12px", color: "#666"}}>Допомагають нам зрозуміти, як відвідувачі взаємодіють із сайтом.&lt;/div>
+                    &lt;/div>
+                &lt;/label>
+
+                &lt;label>
+                    &lt;input type="checkbox" checked={prefs.marketing} onChange={() => handleToggle("marketing")} />
+                    &lt;div>
+                        &lt;strong>Маркетингові&lt;/strong>
+                        &lt;div style={{fontSize: "12px", color: "#666"}}>Використовуються для відстеження відвідувачів з метою показу релевантної реклами.&lt;/div>
+                    &lt;/div>
+                &lt;/label>
+
+                &lt;div className="actions">
+                    &lt;Button onClick={onClose}>Скасувати&lt;/Button>
+                    &lt;Button onClick={() => onSave(prefs)}>Зберегти налаштування&lt;/Button>
+                &lt;/div>
+            &lt;/div>
+        &lt;/Modal>
+    );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a></li><li><a href="module-components_Game_Cell.html">components/Game/Cell</a></li><li><a href="module-components_Game_Column.html">components/Game/Column</a></li><li><a href="module-components_Game_GameBoard.html">components/Game/GameBoard</a></li><li><a href="module-components_Game_GameOverModal.html">components/Game/GameOverModal</a></li><li><a href="module-components_Layout_Layout.html">components/Layout/Layout</a></li><li><a href="module-components_Modal_CookieSettingsModal.html">components/Modal/CookieSettingsModal</a></li><li><a href="module-components_Modal_Modal.html">components/Modal/Modal</a></li><li><a href="module-components_UI_Button.html">components/UI/Button</a></li><li><a href="module-components_UI_Card.html">components/UI/Card</a></li><li><a href="module-context_GameSettingsContext.html">context/GameSettingsContext</a></li><li><a href="module-hooks_useGameState.html">hooks/useGameState</a></li><li><a href="module-main.html">main</a></li><li><a href="module-pages_GamePage_GamePage.html">pages/GamePage/GamePage</a></li><li><a href="module-pages_StartPage_SettingsForm.html">pages/StartPage/SettingsForm</a></li><li><a href="module-pages_StartPage_StartPage.html">pages/StartPage/StartPage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

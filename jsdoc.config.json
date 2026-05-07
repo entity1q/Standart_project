@@ -1,0 +1,20 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": "\\.(jsx|js)$"
+  },
+  "opts": {
+    "destination": "./public/docs/api",
+    "recurse": true,
+    "readme": "./README.md"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": false
+    }
+  }
+}

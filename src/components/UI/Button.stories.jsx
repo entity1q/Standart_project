@@ -21,3 +21,9 @@ export const Settings = {
     children: 'Налаштування',
   },
 };
+
+export const ResetGame = {
+  args: {
+    children: 'Скинути гру',
+  },
+};

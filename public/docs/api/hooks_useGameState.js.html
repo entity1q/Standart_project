@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: hooks/useGameState.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: hooks/useGameState.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file useGameState.js
+ * @description Кастомний React-хук, що інкапсулює всю логіку гри Connect Four.
+ * Керує станом поля, ходами гравців, перевіркою переможця та нічиєї.
+ * @module hooks/useGameState
+ */
+
+import { useState } from "react";
+import { useGameSettings } from "../context/GameSettingsContext";
+
+/**
+ * Кастомний хук для управління станом гри Connect Four.
+ *
+ * Забезпечує:
+ * - Ігрове поле 6×7
+ * - Чергування ходів між гравцями ("R" та "Y")
+ * - Скидання фішки у стовпець з анімацією "падіння"
+ * - Перевірку переможця по горизонталі, вертикалі та діагоналях
+ * - Перевірку нічиєї (всі клітинки заповнені)
+ * - Скидання гри до початкового стану
+ *
+ * @function useGameState
+ * @returns {Object} Об'єкт стану гри
+ * @returns {Array&lt;Array&lt;string|null>>} returns.board - Двовимірний масив 6×7 ігрового поля
+ * @returns {string} returns.currentPlayer - Поточний гравець ("R" або "Y")
+ * @returns {string|null} returns.winner - Ідентифікатор переможця або null
+ * @returns {boolean} returns.isDraw - Прапорець нічиєї
+ * @returns {Function} returns.dropDisc - Функція для скидання фішки у стовпець
+ * @returns {Function} returns.resetGame - Функція для скидання стану гри
+ *
+ * @example
+ * const { board, currentPlayer, winner, isDraw, dropDisc, resetGame } = useGameState();
+ */
+export function useGameState() {
+    /** @constant {Array&lt;Array&lt;null>>} EMPTY_BOARD - Порожнє ігрове поле 6×7 */
+    const EMPTY_BOARD = Array.from({ length: 6 }, () => Array(7).fill(null));
+
+    const { settings } = useGameSettings();
+    /** @type {number} winLength - Кількість фішок у ряд для перемоги (з налаштувань) */
+    const winLength = settings.winLength;
+
+    const [board, setBoard] = useState(EMPTY_BOARD);
+    const [currentPlayer, setCurrentPlayer] = useState("R");
+    const [winner, setWinner] = useState(null);
+    const [isDraw, setIsDraw] = useState(false);
+
+    /**
+     * Скидає фішку поточного гравця у вказаний стовпець.
+     * Фішка "падає" на найнижчу вільну позицію.
+     * Після ходу перевіряє перемогу та нічию.
+     *
+     * @param {number} columnIndex - Індекс стовпця (0-6)
+     */
+    function dropDisc(columnIndex) {
+        if (winner || isDraw) return;
+
+        const newBoard = board.map((row) => [...row]);
+
+        // Падіння фішки
+        for (let row = 5; row >= 0; row--) {
+            if (newBoard[row][columnIndex] === null) {
+                newBoard[row][columnIndex] = currentPlayer;
+                break;
+            }
+        }
+
+        setBoard(newBoard);
+
+        const win = checkWinner(newBoard);
+        if (win) {
+            setWinner(currentPlayer);
+            return;
+        }
+
+        if (checkDraw(newBoard)) {
+            setIsDraw(true);
+            return;
+        }
+
+        setCurrentPlayer((p) => (p === "R" ? "Y" : "R"));
+    }
+
+    /**
+     * Перевіряє, чи є нічия (всі клітинки заповнені).
+     *
+     * @param {Array&lt;Array&lt;string|null>>} board - Поточний стан ігрового поля
+     * @returns {boolean} true, якщо всі клітинки заповнені
+     */
+    function checkDraw(board) {
+        return board.every((row) => row.every((cell) => cell !== null));
+    }
+
+    /**
+     * Перевіряє наявність переможця на ігровому полі.
+     * Шукає послідовність з `winLength` фішок одного гравця у 4 напрямках:
+     * горизонталь, вертикаль, діагональ вниз-вправо, діагональ вгору-вправо.
+     *
+     * @param {Array&lt;Array&lt;string|null>>} board - Поточний стан ігрового поля
+     * @returns {string|null} Ідентифікатор переможця ("R" або "Y") або null
+     */
+    function checkWinner(board) {
+        const directions = [
+            { x: 1, y: 0 },   // горизонталь
+            { x: 0, y: 1 },   // вертикаль
+            { x: 1, y: 1 },   // діагональ вниз вправо
+            { x: 1, y: -1 },  // діагональ вгору вправо
+        ];
+
+        for (let row = 0; row &lt; 6; row++) {
+            for (let col = 0; col &lt; 7; col++) {
+                const player = board[row][col];
+                if (!player) continue;
+
+                for (const { x, y } of directions) {
+                    if (checkLine(board, row, col, x, y, player)) {
+                        return player;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Перевіряє лінію з `winLength` фішок одного гравця від заданої позиції.
+     *
+     * @param {Array&lt;Array&lt;string|null>>} board - Ігрове поле
+     * @param {number} r - Початковий рядок
+     * @param {number} c - Початковий стовпець
+     * @param {number} dx - Зміщення по стовпцю на кожному кроці
+     * @param {number} dy - Зміщення по рядку на кожному кроці
+     * @param {string} player - Ідентифікатор гравця ("R" або "Y")
+     * @returns {boolean} true, якщо знайдено лінію з `winLength` фішок
+     */
+    function checkLine(board, r, c, dx, dy, player) {
+        for (let i = 1; i &lt; winLength; i++) {
+            const nr = r + dy * i;
+            const nc = c + dx * i;
+
+            if (nr &lt; 0 || nr >= 6 || nc &lt; 0 || nc >= 7) return false;
+            if (board[nr][nc] !== player) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Скидає гру до початкового стану:
+     * очищає поле, встановлює гравця "R" як поточного,
+     * скидає переможця та прапорець нічиєї.
+     */
+    function resetGame() {
+        setBoard(EMPTY_BOARD);
+        setCurrentPlayer("R");
+        setWinner(null);
+        setIsDraw(false);
+    }
+
+    return {
+        board,
+        currentPlayer,
+        winner,
+        isDraw,
+        dropDisc,
+        resetGame,
+    };
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a></li><li><a href="module-components_Game_Cell.html">components/Game/Cell</a></li><li><a href="module-components_Game_Column.html">components/Game/Column</a></li><li><a href="module-components_Game_GameBoard.html">components/Game/GameBoard</a></li><li><a href="module-components_Game_GameOverModal.html">components/Game/GameOverModal</a></li><li><a href="module-components_Layout_Layout.html">components/Layout/Layout</a></li><li><a href="module-components_Modal_CookieSettingsModal.html">components/Modal/CookieSettingsModal</a></li><li><a href="module-components_Modal_Modal.html">components/Modal/Modal</a></li><li><a href="module-components_UI_Button.html">components/UI/Button</a></li><li><a href="module-components_UI_Card.html">components/UI/Card</a></li><li><a href="module-context_GameSettingsContext.html">context/GameSettingsContext</a></li><li><a href="module-hooks_useGameState.html">hooks/useGameState</a></li><li><a href="module-main.html">main</a></li><li><a href="module-pages_GamePage_GamePage.html">pages/GamePage/GamePage</a></li><li><a href="module-pages_StartPage_SettingsForm.html">pages/StartPage/SettingsForm</a></li><li><a href="module-pages_StartPage_StartPage.html">pages/StartPage/StartPage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

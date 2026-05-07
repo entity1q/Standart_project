@@ -1,3 +1,10 @@
+/**
+ * @file GamePage.jsx
+ * @description Сторінка гри Connect Four.
+ * Відображає ігрове поле, інформацію про поточний хід, рахунок та модальне вікно завершення.
+ * @module pages/GamePage/GamePage
+ */
+
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
@@ -9,6 +16,15 @@ import { useGameSettings } from "../../context/GameSettingsContext";
 
 import styles from "./GamePage.module.css"; //
 
+/**
+ * Компонент сторінки гри Connect Four.
+ * Управляє процесом гри: відображає ігрове поле ({@link GameBoard}),
+ * відстежує рахунок перемог по раундах, визначає фінального переможця матчу
+ * та показує модальне вікно результату ({@link GameOverModal}).
+ *
+ * @function GamePage
+ * @returns {React.ReactElement} Сторінка з ігровим полем та елементами управління
+ */
 export default function GamePage() {
     const navigate = useNavigate();
     const { userId } = useParams();
@@ -16,9 +32,15 @@ export default function GamePage() {
     const game = useGameState();
     const { settings } = useGameSettings();
 
+    /** @type {Object} wins - Об'єкт з кількістю перемог кожного гравця у поточному матчі */
     const [wins, setWins] = useState({ R: 0, Y: 0 });
+    /** @type {string|null} finalWinner - Ідентифікатор фінального переможця матчу */
     const [finalWinner, setFinalWinner] = useState(null);
 
+    /**
+     * Ефект відстеження перемоги.
+     * При кожній перемозі оновлює лічильник та перевіряє досягнення maxWins.
+     */
     useEffect(() => {
         if (game.winner) {
             setWins((prev) => {
@@ -36,6 +58,9 @@ export default function GamePage() {
         }
     }, [game.winner, settings.maxWins]);
 
+    /**
+     * Повертає користувача до стартової сторінки.
+     */
     function returnToMenu() {
         navigate(`/user/${userId}/start`);
     }

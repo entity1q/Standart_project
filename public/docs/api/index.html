@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Connect Four — Vite + React</h1>
+<h2>Інформація про проєкт</h2>
+<ul>
+<li><strong>Автор:</strong> Піхало Антон Миколайович</li>
+<li><strong>Група:</strong> VT-23-2</li>
+<li><strong>Навчальний заклад:</strong> Державний університет «Житомирська політехніка»</li>
+</ul>
+<h2>Юридична інформація та GDPR</h2>
+<ul>
+<li><strong>Ліцензія:</strong> <a href="./LICENSE">MIT</a></li>
+<li><strong>Репорт ліцензій:</strong> <a href="./license-report.txt">license-report.txt</a> — згенеровано через <code>license-checker</code></li>
+<li><strong>Політика конфіденційності:</strong> <a href="./PRIVACY_POLICY.md">PRIVACY_POLICY.md</a> (згідно з GDPR)</li>
+<li><strong>Документація:</strong> Згенерована за допомогою <a href="https://jsdoc.app/">JSDoc</a> — див. секцію нижче</li>
+</ul>
+<p>--</p>
+<h2>Базові команди</h2>
+<pre class="prettyprint source lang-bash"><code>
+- `npm install` — встановлення залежностей
+- `npm run dev` — запуск локального сервера
+- `npm run docs` — генерація документації (JSDoc)
+- `npm run storybook` — запуск Storybook
+- `npx storybook@latest init` — ініціалізація Storybook (в процесі)
+
+</code></pre>
+<h2>Документація (JSDoc)</h2>
+<p>Документація проєкту згенерована автоматично за допомогою <a href="https://jsdoc.app/">JSDoc</a>.</p>
+<h3>Генерація документації:</h3>
+<pre class="prettyprint source lang-bash"><code>npm run docs
+</code></pre>
+<h3>Перегляд документації:</h3>
+<p>Після генерації відкрийте файл <code>docs/index.html</code> у браузері:</p>
+<pre class="prettyprint source lang-bash"><code>start docs/index.html
+</code></pre>
+<p>Документація включає опис усіх модулів, компонентів, хуків та контекстів:</p>
+<ul>
+<li><strong>Компоненти:</strong> Button, Card, Cell, Column, GameBoard, GameOverModal, Layout, Modal</li>
+<li><strong>Хуки:</strong> useGameState — логіка гри Connect Four</li>
+<li><strong>Контексти:</strong> GameSettingsContext — налаштування гри</li>
+<li><strong>Сторінки:</strong> StartPage, GamePage, SettingsForm</li>
+</ul>
+<h2>Лабораторна №1</h2>
+<p>Створено каркас застосунку без логіки:</p>
+<ul>
+<li>сторінки: Start, Game, Result</li>
+<li>компоненти: Layout, Button, Card, GameBoard, Column, Cell</li>
+<li>базові стилі та структура проєкту</li>
+<li>навігація між сторінками через локальний state <code>App.jsx</code></li>
+</ul>
+<hr>
+<h2>Лабораторна №2</h2>
+<p>Додано основну логіку гри через кастомний хук:</p>
+<ul>
+<li>хук <code>useGameState()</code> зі станами:
+<ul>
+<li>поле 6×7</li>
+<li>поточний гравець</li>
+<li>Поява фішки</li>
+<li>перевірка переможця</li>
+<li>перевірка нічиєї</li>
+<li>скидання гри</li>
+</ul>
+</li>
+<li>GamePage отримує стан гри та передає результат у ResultPage</li>
+<li>ResultPage відображає переможця або нічию</li>
+</ul>
+<hr>
+<h2>Лабораторна №3</h2>
+<ul>
+<li>
+<p>Додано налаштування гри та завершення раундів через модальне вікно:</p>
+</li>
+<li>
+<p>створено форму налаштувань на react-hook-form + yup</p>
+</li>
+<li>
+<p>налаштування зберігаються у GameSettingsContext та localStorage</p>
+</li>
+<li>
+<p>параметри, які можна змінювати:</p>
+</li>
+<li>
+<p>кількість фішок для перемоги (winLength)</p>
+</li>
+<li>
+<p>кількість перемог для виграшу матчу (maxWins)</p>
+</li>
+<li>
+<p>колір гравця 1 та гравця 2</p>
+</li>
+<li>
+<p>у useGameState() використовується winLength для перевірки перемоги</p>
+</li>
+<li>
+<p>у GamePage ведеться підрахунок перемог за раунди з урахуванням maxWins</p>
+</li>
+<li>
+<p>реалізовано модальне вікно завершення гри через портал (Modal + createPortal), яке:</p>
+</li>
+<li>
+<p>показує переможця раунду або нічию</p>
+</li>
+<li>
+<p>відображає поточний рахунок гравців</p>
+</li>
+<li>
+<p>у разі досягнення maxWins показує фінального переможця матчу</p>
+<ul>
+<li>надає можливість:</li>
+<li>розпочати наступний тур</li>
+<li>повернутися в головне меню</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Лабораторна №4</h2>
+<p>Реалізовано роутинг та стилізацію застосунку:</p>
+<h3>Роутинг</h3>
+<ul>
+<li>
+<p>додано <code>react-router-dom</code></p>
+</li>
+<li>
+<p>створено динамічні маршрути з використанням <code>:userId</code>:</p>
+<ul>
+<li><code>/user/:userId/start</code></li>
+<li><code>/user/:userId/game</code></li>
+</ul>
+</li>
+<li>
+<p>редірект з кореня <code>/</code> → <code>/user/guest/start</code></p>
+</li>
+<li>
+<p>навігація реалізована через <code>useNavigate()</code></p>
+</li>
+<li>
+<p><code>useParams()</code> використовується для отримання <code>userId</code> на сторінках</p>
+</li>
+</ul>
+<h3>Стилізація</h3>
+<ul>
+<li>сторінку StartPage та GamePage переведено на <strong>CSS Modules</strong>
+<ul>
+<li><code>StartPage</code> → <code>StartPage.module.css</code></li>
+<li><code>GamePage</code> → <code>GamePage.module.css</code></li>
+<li>імпорт стилів через <code>import styles from &quot;./... .module.css&quot;</code></li>
+</ul>
+</li>
+<li>інші сторінки стилізовані через стандартні CSS-файли</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a></li><li><a href="module-components_Game_Cell.html">components/Game/Cell</a></li><li><a href="module-components_Game_Column.html">components/Game/Column</a></li><li><a href="module-components_Game_GameBoard.html">components/Game/GameBoard</a></li><li><a href="module-components_Game_GameOverModal.html">components/Game/GameOverModal</a></li><li><a href="module-components_Layout_Layout.html">components/Layout/Layout</a></li><li><a href="module-components_Modal_CookieSettingsModal.html">components/Modal/CookieSettingsModal</a></li><li><a href="module-components_Modal_Modal.html">components/Modal/Modal</a></li><li><a href="module-components_UI_Button.html">components/UI/Button</a></li><li><a href="module-components_UI_Card.html">components/UI/Card</a></li><li><a href="module-context_GameSettingsContext.html">context/GameSettingsContext</a></li><li><a href="module-hooks_useGameState.html">hooks/useGameState</a></li><li><a href="module-main.html">main</a></li><li><a href="module-pages_GamePage_GamePage.html">pages/GamePage/GamePage</a></li><li><a href="module-pages_StartPage_SettingsForm.html">pages/StartPage/SettingsForm</a></li><li><a href="module-pages_StartPage_StartPage.html">pages/StartPage/StartPage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

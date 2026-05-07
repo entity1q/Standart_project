@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документація | Connect Four</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1a202c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.05);
+            width: 320px;
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 20px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .card.jsdoc {
+            border: 2px solid #48bb78;
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .card p {
+            color: #a0aec0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            color: white;
+            width: 80%;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-green {
+            background-color: #48bb78;
+        }
+
+        .btn-pink {
+            background-color: #ed64a6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🎮 Connect Four</h1>
+        <p>Хаб документації проєкту. Оберіть необхідний розділ для перегляду API або тестування UI-компонентів.</p>
+    </div>
+
+    <div class="cards-container">
+        <!-- JSDoc Card -->
+        <div class="card jsdoc">
+            <div class="icon">📘</div>
+            <h2>API Docs (JSDoc)</h2>
+            <p>Технічна документація вихідного коду: детальний опис класів, UI-компонентів, роз'яснення кастомних хуків, їхніх параметрів та властивостей.</p>
+            <a href="./api/index.html" class="btn btn-green">Відкрити API Docs</a>
+        </div>
+
+        <!-- Storybook Card -->
+        <div class="card">
+            <div class="icon">🎨</div>
+            <h2>Storybook</h2>
+            <p>Інтерактивний каталог для візуального тестування компонентів. Перевіряйте варіації кнопок та модальних вікон у реальному часі.</p>
+            <a href="http://localhost:6006/" target="_blank" class="btn btn-pink">Запустити Storybook</a>
+        </div>
+    </div>
+
+</body>
+</html>
