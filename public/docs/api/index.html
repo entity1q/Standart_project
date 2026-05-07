@@ -43,154 +43,49 @@
 
 
     <section>
-        <article><h1>Connect Four — Vite + React</h1>
-<h2>Інформація про проєкт</h2>
+        <article><h1>Connect Four — Технічна Документація</h1>
+<p>Вітаємо у хабі API-документації навчального проєкту Connect Four. Тут ви знайдете усю технічну інформацію про архітектуру та вихідний код гри.</p>
+<hr>
+<h2>🎯 Про проєкт</h2>
+<p>Connect Four — це повноцінна веб-версія класичної настільної гри &quot;Чотири в ряд&quot;, створена на React + Vite. Головне завдання гравців — по черзі кидати свої фішки у стовпці так, щоб першим зібрати переможну комбінацію фішок одного кольору в ряд (по горизонталі, вертикалі або діагоналі). Гра підтримує гнучкі налаштування та веде підрахунок перемог.</p>
+<h3>Ключовий функціонал:</h3>
 <ul>
-<li><strong>Автор:</strong> Піхало Антон Миколайович</li>
-<li><strong>Група:</strong> VT-23-2</li>
-<li><strong>Навчальний заклад:</strong> Державний університет «Житомирська політехніка»</li>
-</ul>
-<h2>Юридична інформація та GDPR</h2>
-<ul>
-<li><strong>Ліцензія:</strong> <a href="./LICENSE">MIT</a></li>
-<li><strong>Репорт ліцензій:</strong> <a href="./license-report.txt">license-report.txt</a> — згенеровано через <code>license-checker</code></li>
-<li><strong>Політика конфіденційності:</strong> <a href="./PRIVACY_POLICY.md">PRIVACY_POLICY.md</a> (згідно з GDPR)</li>
-<li><strong>Документація:</strong> Згенерована за допомогою <a href="https://jsdoc.app/">JSDoc</a> — див. секцію нижче</li>
-</ul>
-<p>--</p>
-<h2>Базові команди</h2>
-<pre class="prettyprint source lang-bash"><code>
-- `npm install` — встановлення залежностей
-- `npm run dev` — запуск локального сервера
-- `npm run docs` — генерація документації (JSDoc)
-- `npm run storybook` — запуск Storybook
-- `npx storybook@latest init` — ініціалізація Storybook (в процесі)
-
-</code></pre>
-<h2>Документація (JSDoc)</h2>
-<p>Документація проєкту згенерована автоматично за допомогою <a href="https://jsdoc.app/">JSDoc</a>.</p>
-<h3>Генерація документації:</h3>
-<pre class="prettyprint source lang-bash"><code>npm run docs
-</code></pre>
-<h3>Перегляд документації:</h3>
-<p>Після генерації відкрийте файл <code>docs/index.html</code> у браузері:</p>
-<pre class="prettyprint source lang-bash"><code>start docs/index.html
-</code></pre>
-<p>Документація включає опис усіх модулів, компонентів, хуків та контекстів:</p>
-<ul>
-<li><strong>Компоненти:</strong> Button, Card, Cell, Column, GameBoard, GameOverModal, Layout, Modal</li>
-<li><strong>Хуки:</strong> useGameState — логіка гри Connect Four</li>
-<li><strong>Контексти:</strong> GameSettingsContext — налаштування гри</li>
-<li><strong>Сторінки:</strong> StartPage, GamePage, SettingsForm</li>
-</ul>
-<h2>Лабораторна №1</h2>
-<p>Створено каркас застосунку без логіки:</p>
-<ul>
-<li>сторінки: Start, Game, Result</li>
-<li>компоненти: Layout, Button, Card, GameBoard, Column, Cell</li>
-<li>базові стилі та структура проєкту</li>
-<li>навігація між сторінками через локальний state <code>App.jsx</code></li>
+<li>⚙️ Можливість налаштувати кількість фішок для перемоги (winLength) та необхідну кількість перемог для виграшу матчу.</li>
+<li>🎨 Кастомізація кольорів фішок для кожного гравця.</li>
+<li>🍪 Регулювання налаштувань файлів cookie для відповідності GDPR.</li>
+<li>💾 Збереження налаштувань гри у локальному сховищі (localStorage).</li>
 </ul>
 <hr>
-<h2>Лабораторна №2</h2>
-<p>Додано основну логіку гри через кастомний хук:</p>
+<h2>🛠 Технологічний стек</h2>
+<p>Проєкт використовує сучасний стек веб-розробки:</p>
 <ul>
-<li>хук <code>useGameState()</code> зі станами:
-<ul>
-<li>поле 6×7</li>
-<li>поточний гравець</li>
-<li>Поява фішки</li>
-<li>перевірка переможця</li>
-<li>перевірка нічиєї</li>
-<li>скидання гри</li>
-</ul>
-</li>
-<li>GamePage отримує стан гри та передає результат у ResultPage</li>
-<li>ResultPage відображає переможця або нічию</li>
+<li>Основний фреймворк: React (v18)</li>
+<li>Інструмент збірки: Vite (v5)</li>
+<li>Управління формами: react-hook-form &amp; Yup</li>
+<li>Сповіщення про файли cookie: react-cookie-consent</li>
+<li>Маршрутизація: react-router-dom</li>
+<li>Документація коду: JSDoc</li>
+<li>Тестування UI-компонентів: Storybook</li>
 </ul>
 <hr>
-<h2>Лабораторна №3</h2>
-<ul>
-<li>
-<p>Додано налаштування гри та завершення раундів через модальне вікно:</p>
-</li>
-<li>
-<p>створено форму налаштувань на react-hook-form + yup</p>
-</li>
-<li>
-<p>налаштування зберігаються у GameSettingsContext та localStorage</p>
-</li>
-<li>
-<p>параметри, які можна змінювати:</p>
-</li>
-<li>
-<p>кількість фішок для перемоги (winLength)</p>
-</li>
-<li>
-<p>кількість перемог для виграшу матчу (maxWins)</p>
-</li>
-<li>
-<p>колір гравця 1 та гравця 2</p>
-</li>
-<li>
-<p>у useGameState() використовується winLength для перевірки перемоги</p>
-</li>
-<li>
-<p>у GamePage ведеться підрахунок перемог за раунди з урахуванням maxWins</p>
-</li>
-<li>
-<p>реалізовано модальне вікно завершення гри через портал (Modal + createPortal), яке:</p>
-</li>
-<li>
-<p>показує переможця раунду або нічию</p>
-</li>
-<li>
-<p>відображає поточний рахунок гравців</p>
-</li>
-<li>
-<p>у разі досягнення maxWins показує фінального переможця матчу</p>
-<ul>
-<li>надає можливість:</li>
-<li>розпочати наступний тур</li>
-<li>повернутися в головне меню</li>
-</ul>
-</li>
-</ul>
+<h2>🎨 Storybook (Каталог Компонентів)</h2>
+<p>Ми використовуємо Storybook для розробки та тестування UI-елементів ізольовано від основної бізнес-логіки додатка. Ви можете запустити локальний сервер (<code>npm run storybook</code>) і взаємодіяти з компонентами (<code>Button</code>, <code>GameBoard</code>, <code>Cell</code>, <code>Column</code>, <code>GameOverModal</code> тощо).</p>
+<p>👉 <a href="http://localhost:6006">Відкрити Storybook (UI Каталог)</a></p>
 <hr>
-<h2>Лабораторна №4</h2>
-<p>Реалізовано роутинг та стилізацію застосунку:</p>
-<h3>Роутинг</h3>
+<h2>📚 API Документація 👈 <em>(Використовуйте боковий Navbar)</em></h2>
+<p>Ця сторінка згенерована автоматично завдяки <code>JSDoc</code>. За допомогою бокового меню (Navbar) праворуч ви можете переглядати детальну структуру проєкту:</p>
+<ol>
+<li><strong>Компоненти (Components):</strong> Як вони влаштовані, які <code>Props</code> приймають і за що відповідають (наприклад, <code>GameBoard</code>, <code>Cell</code>, <code>Modal</code>).</li>
+<li><strong>Хуки (Hooks):</strong> Спеціальні функції для роботи з реактивним станом гри (наприклад, <code>useGameState</code>).</li>
+<li><strong>Глобальні контексти (Contexts):</strong> Управління глобальними налаштуваннями гри (<code>GameSettingsContext</code>).</li>
+</ol>
+<p>💡 <em>Перейдіть до розділу &quot;Modules&quot; або &quot;Classes&quot; у боковому меню, щоб детальніше вивчити код.</em></p>
+<hr>
+<h2>⚖️ Юридична інформація</h2>
 <ul>
-<li>
-<p>додано <code>react-router-dom</code></p>
-</li>
-<li>
-<p>створено динамічні маршрути з використанням <code>:userId</code>:</p>
-<ul>
-<li><code>/user/:userId/start</code></li>
-<li><code>/user/:userId/game</code></li>
-</ul>
-</li>
-<li>
-<p>редірект з кореня <code>/</code> → <code>/user/guest/start</code></p>
-</li>
-<li>
-<p>навігація реалізована через <code>useNavigate()</code></p>
-</li>
-<li>
-<p><code>useParams()</code> використовується для отримання <code>userId</code> на сторінках</p>
-</li>
-</ul>
-<h3>Стилізація</h3>
-<ul>
-<li>сторінку StartPage та GamePage переведено на <strong>CSS Modules</strong>
-<ul>
-<li><code>StartPage</code> → <code>StartPage.module.css</code></li>
-<li><code>GamePage</code> → <code>GamePage.module.css</code></li>
-<li>імпорт стилів через <code>import styles from &quot;./... .module.css&quot;</code></li>
-</ul>
-</li>
-<li>інші сторінки стилізовані через стандартні CSS-файли</li>
+<li><strong>Автор:</strong> Піхало Антон Миколайович (Група VT-23-2, Державний університет «Житомирська політехніка»)</li>
+<li><strong>Ліцензія:</strong> <a href="./LICENSE">MIT</a> (див. також <a href="./license-report.txt">Репорт ліцензій</a>)</li>
+<li><strong>Політика конфіденційності:</strong> <a href="./PRIVACY_POLICY.md">PRIVACY_POLICY.md</a></li>
 </ul></article>
     </section>
 
